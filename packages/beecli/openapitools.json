@@ -1,0 +1,25 @@
+{
+  "$schema": "node_modules/@openapitools/openapi-generator-cli/config.schema.json",
+  "spaces": 2,
+  "generator-cli": {
+    "version": "7.20.0",
+    "generators": {
+      "bee-trade-platform-v2": {
+        "inputSpec": "https://api.dev.beetrade.com/api/v2/docs/doc.json",
+        "generatorName": "typescript-fetch",
+        "output": "sdk/beetrade-v2",
+        "typeMappings": {
+          "DateTime": "Date"
+        },
+        "generateAliasAsModel": true,
+        "apiPackage": "apis",
+        "modelPackage": "models",
+        "additionalProperties": {
+          "withSeparateModelsAndApi": true,
+          "stringEnums": true
+        },
+        "skipValidateSpec": true
+      }
+    }
+  }
+}

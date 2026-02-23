@@ -1,0 +1,5 @@
+{
+  "name": "beeclaw",
+  "private": true,
+  "workspaces": ["packages/*"]
+}

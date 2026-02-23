@@ -1,5 +1,8 @@
 {
   "name": "beeclaw",
   "private": true,
-  "workspaces": ["packages/*"]
+  "workspaces": ["packages/*"],
+  "scripts": {
+    "build": "tsc -b packages/*"
+  }
 }

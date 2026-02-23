@@ -1,4 +1,4 @@
-import { Command } from "commander";
+import type { Command } from "commander";
 import { LiveTradeApi } from "../../sdk/beetrade-v2";
 import { createConfig, requireAuth } from "../client";
 import { json, error } from "../output";

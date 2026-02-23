@@ -1,11 +1,20 @@
 {
-  "name": "beecli",
+  "name": "beetrade-cli",
   "module": "index.ts",
   "type": "module",
   "private": true,
   "scripts": {
-    "sdk:v2": "openapi-generator-cli generate --generator-key bee-trade-platform-v2"
+    "sdk:v2": "openapi-generator-cli generate --generator-key bee-trade-platform-v2",
+    "build": "tsc -p tsconfig.json"
   },
+  "bin": {
+    "beecli": "bin/beecli.js"
+  },
+  "files": [
+    "bin",
+    "dist",
+    "README.md"
+  ],
   "devDependencies": {
     "@openapitools/openapi-generator-cli": "^2.29.0",
     "@types/bun": "latest"

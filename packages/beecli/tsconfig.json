@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "lib": ["ESNext"],
+    "lib": ["ESNext", "DOM"],
     "target": "ESNext",
     "module": "Preserve",
     "moduleDetection": "force",
@@ -14,10 +14,14 @@
     "skipLibCheck": true,
     "noFallthroughCasesInSwitch": true,
     "noUncheckedIndexedAccess": true,
-    "noImplicitOverride": true,
+    // Auto-generated SDK code (beetrade-v2) doesn't have override modifiers.
+    // Since SDK is imported by src/, TypeScript type-checks it regardless of excludes.
+    "noImplicitOverride": false,
     "noUnusedLocals": false,
     "noUnusedParameters": false,
-    "noPropertyAccessFromIndexSignature": false
+    "noPropertyAccessFromIndexSignature": false,
+    "outDir": "dist",
   },
-  "exclude": ["sdk/**/*"]
+  "include": ["index.ts", "src/**/*"],
+  "exclude": ["node_modules", "sdk", "sdk/**/*"]
 }

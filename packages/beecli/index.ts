@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 import { Command } from "commander";
 import { registerAuthCommand } from "./src/commands/auth";
 import { registerBotsCommand } from "./src/commands/bots";

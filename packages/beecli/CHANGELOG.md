@@ -1,5 +1,11 @@
 # @beelabs/beetrade-cli
 
+## 0.0.3
+
+### Patch Changes
+
+- add trading command
+
 ## 0.0.2
 
 ### Patch Changes

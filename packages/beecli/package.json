@@ -1,7 +1,6 @@
 {
   "name": "@beelabs/beetrade-cli",
   "module": "index.ts",
-  "type": "module",
   "version": "0.0.2",
   "scripts": {
     "sdk:v2": "openapi-generator-cli generate --generator-key bee-trade-platform-v2",

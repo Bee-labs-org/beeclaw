@@ -86,7 +86,7 @@ beecli bots types
 
 ```bash
 # List symbols for a brokerage
-beecli market symbols -b <brokerage-id> [--page 1] [--per-page 50] [-n <name>]
+beecli market symbols -b <brokerage-id> [--page 1] [--per-page 50] [-n <name>] [--sort-by <field>] [--include-brokerage]
 
 # Get OHLCV historical data
 beecli market history -s <symbol> --from <iso-datetime> --to <iso-datetime> -i <interval>
@@ -108,7 +108,7 @@ beecli portfolio analysis
 beecli portfolio total-assets -c <currency>
 
 # Get assets summary over time
-beecli portfolio assets-summary -c <currency> -p <days> [--provider <provider>]
+beecli portfolio assets-summary -c <currency> -p <days> [--provider <provider>] [-t <trading-client-id>]
 ```
 
 ### Watchlists
@@ -141,6 +141,143 @@ beecli trading detail <strategy-id> [--paper]
 
 # Stop a live trade
 beecli trading stop <strategy-id> [--paper]
+```
+
+### Strategies
+
+```bash
+# List all strategies
+beecli strategies list [--page 1] [--page-size 20] [-k <keyword>]
+
+# Get strategy details
+beecli strategies get <id>
+
+# Create a new strategy
+beecli strategies create -n <name> -d '<json-data>' [--description <description>]
+
+# Update a strategy
+beecli strategies update <id> [-n <name>] [-d '<json-data>'] [--description <description>]
+
+# Delete a strategy
+beecli strategies delete <id>
+
+# Run strategy backtest
+beecli strategies backtest <id> -b <brokerage-id> -c <cash> --from <YYYY-MM-DD> --to <YYYY-MM-DD>
+
+# Start paper trading
+beecli strategies paper <id> -b <brokerage-id> -c <cash>
+
+# Start live trading
+beecli strategies live <id> -a <brokerage-account-id>
+
+# Schedule a strategy
+beecli strategies schedule <id> -e '<cron-expression>'
+
+# Get strategy schedule info
+beecli strategies schedule-info <id>
+
+# Delete a schedule
+beecli strategies schedule-delete <schedule-id>
+
+# List strategy alerts
+beecli strategies alerts <id>
+
+# Create strategy alert
+beecli strategies create-alert <id> -c '<json-config>'
+
+# Update strategy alert
+beecli strategies update-alert <id> <alert-id> -c '<json-config>'
+
+# Delete strategy alert
+beecli strategies delete-alert <id> <alert-id>
+
+# List strategy versions
+beecli strategies versions <id> [--page 1] [--page-size 20]
+
+# Rollback strategy to version
+beecli strategies rollback <id> <version-id>
+
+# Get strategy execution history
+beecli strategies history <id> [--page 1] [--page-size 20] [--status <status>]
+
+# Optimize strategy parameters using ML
+beecli strategies optimize <id> -c '<json-config>'
+```
+
+### Alerts
+
+```bash
+# List all alerts
+beecli alerts list [--page 1] [--page-size 20] [-k <keyword>] [--status <true/false>] [-b <brokerage-id>]
+
+# Get alert details
+beecli alerts get <id>
+
+# Create a new alert
+beecli alerts create -c '<json-config>'
+
+# Update an alert
+beecli alerts update <id> -c '<json-config>'
+
+# Delete an alert
+beecli alerts delete <id>
+
+# Toggle alert status
+beecli alerts toggle <id> --active <true/false>
+```
+
+### Brokerages
+
+```bash
+# List all brokerages
+beecli brokerages list [--page 1] [--page-size 20] [--search <keyword>] [--all] [-l <lang>]
+
+# Get brokerage by code
+beecli brokerages get <code> [-l <lang>]
+
+# Get brokerages available for live trading
+beecli brokerages live-trade [-l <lang>]
+```
+
+### Accounts
+
+```bash
+# List all brokerage accounts
+beecli accounts list [-t <trading-client-id>] [-l <lang>]
+
+# Get accounts grouped by trading client
+beecli accounts grouped [-l <lang>]
+
+# Get brokerage account details
+beecli accounts get <id> [-l <lang>]
+
+# Create a new brokerage account
+beecli accounts create <brokerage-id> [-l <lang>]
+
+# Update brokerage account credentials
+beecli accounts update <id> -c '<json-credentials>' [-l <lang>]
+
+# Delete a brokerage account
+beecli accounts delete <id> [-l <lang>]
+
+# Get account balance
+beecli accounts balance <id>
+```
+
+### Clients
+
+```bash
+# List all trading clients
+beecli clients list [-l <lang>]
+
+# Create a new trading client
+beecli clients create -n <name> [-d <description>] [-l <lang>]
+
+# Update a trading client
+beecli clients update <id> [-n <name>] [-d <description>] [-l <lang>]
+
+# Delete a trading client
+beecli clients delete <id> [-l <lang>]
 ```
 
 ## Output Format

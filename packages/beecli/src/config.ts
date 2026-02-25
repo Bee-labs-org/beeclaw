@@ -12,7 +12,7 @@ export interface CliConfig {
 const CONFIG_DIR = join(homedir(), ".beecli");
 const CONFIG_FILE = join(CONFIG_DIR, "config.json");
 
-const DEFAULT_API_URL = "https://api.beetrade.com/api/v2";
+const DEFAULT_API_URL = "https://api.prod.beetrade.com/api/v2";
 
 export function getConfig(): CliConfig {
   const defaults: CliConfig = { apiUrl: DEFAULT_API_URL };

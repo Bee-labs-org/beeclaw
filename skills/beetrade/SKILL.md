@@ -72,5 +72,5 @@ Use [references/commands.md](references/commands.md) for the full command catalo
 ## Notes
 
 - Config file location: `~/.beecli/config.json`
-- Default API URL: `https://api.beetrade.com/api/v2`
+- Default API URL: `https://api.prod.beetrade.com/api/v2`
 - Command actions generally emit JSON; CLI help/argument validation output may not be JSON.

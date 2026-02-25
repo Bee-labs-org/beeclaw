@@ -25,7 +25,7 @@ beecli --help
 
 The CLI stores configuration in `~/.beecli/config.json`:
 
-- `apiUrl` - API base URL (default: `https://api.beetrade.com/api/v2`)
+- `apiUrl` - API base URL (default: `https://api.prod.beetrade.com/api/v2`)
 - `accessToken` - Authentication token
 - `refreshToken` - Token refresh credential
 - `email` - Logged in user email
@@ -286,7 +286,7 @@ All commands output JSON for easy scripting and integration:
 
 ```bash
 beecli auth status
-# {"authenticated": true, "email": "user@example.com", "apiUrl": "https://api.beetrade.com/api/v2"}
+# {"authenticated": true, "email": "user@example.com", "apiUrl": "https://api.prod.beetrade.com/api/v2"}
 
 beecli bots list
 # {"data": [...], "page": 1, "pageSize": 20, "total": 100}

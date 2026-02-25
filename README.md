@@ -134,7 +134,7 @@ You can also use the generated SDK directly in your TypeScript projects:
 import { Configuration, BotsApi } from "@beelabs/beetrade-cli/sdk/beetrade-v2";
 
 const config = new Configuration({
-  basePath: "https://api.beetrade.com/api/v2",
+  basePath: "https://api.prod.beetrade.com/api/v2",
   accessToken: "your-api-token",
 });
 

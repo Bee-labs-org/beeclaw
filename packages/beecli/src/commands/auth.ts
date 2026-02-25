@@ -1,8 +1,61 @@
 import type { Command } from "commander";
+import { createInterface } from "node:readline/promises";
+import { Writable } from "node:stream";
 import { AuthApi, type LoginRequest } from "../../sdk/beetrade-v2";
 import { createConfig } from "../client";
 import { getConfig, setConfig, clearConfig } from "../config";
 import { json, error, success } from "../output";
+
+async function resolveLoginCredentials(options: {
+  email?: string;
+  password?: string;
+}): Promise<{ email: string; password: string }> {
+  if (options.email && options.password) {
+    return { email: options.email, password: options.password };
+  }
+
+  if (!process.stdin.isTTY || !process.stdout.isTTY) {
+    error(
+      "Missing credentials: use --email and --password in non-interactive mode"
+    );
+  }
+
+  let muted = false;
+  const mutedOutput = new Writable({
+    write(chunk: string | Uint8Array, _encoding, callback): void {
+      if (!muted) {
+        process.stdout.write(chunk);
+      }
+      callback();
+    },
+  });
+
+  const rl = createInterface({
+    input: process.stdin,
+    output: mutedOutput,
+    terminal: true,
+  });
+
+  try {
+    const email =
+      options.email ??
+      (await rl.question("Email: ")).trim();
+    muted = true;
+    const password =
+      options.password ??
+      (await rl.question("Password: "));
+    muted = false;
+    process.stdout.write("\n");
+
+    if (!email || !password) {
+      error("Both email and password are required");
+    }
+
+    return { email, password };
+  } finally {
+    rl.close();
+  }
+}
 
 export function registerAuthCommand(program: Command): void {
   const auth = program.command("auth").description("Authentication commands");
@@ -10,19 +63,20 @@ export function registerAuthCommand(program: Command): void {
   auth
     .command("login")
     .description("Login with email and password")
-    .requiredOption("-e, --email <email>", "Email address")
-    .requiredOption("-p, --password <password>", "Password")
+    .option("-e, --email <email>", "Email address")
+    .option("-p, --password <password>", "Password")
     .option("--api-url <url>", "API base URL")
     .action(async (options) => {
       try {
+        const credentials = await resolveLoginCredentials(options);
         const config = createConfig(
           options.apiUrl ? { basePath: options.apiUrl } : undefined
         );
         const api = new AuthApi(config);
 
         const request: LoginRequest = {
-          email: options.email,
-          password: options.password,
+          email: credentials.email,
+          password: credentials.password,
         };
 
         const response = await api.authLoginPost({ request });
@@ -36,7 +90,7 @@ export function registerAuthCommand(program: Command): void {
           apiUrl: options.apiUrl || getConfig().apiUrl,
           accessToken: data!.accessToken,
           refreshToken: data!.refreshToken,
-          email: options.email,
+          email: credentials.email,
         });
 
         success({

@@ -220,7 +220,7 @@ The SDK in `packages/beecli/sdk/beetrade-v2/` is auto-generated. Do not edit the
 import { Configuration, BotsApi } from "./sdk/beetrade-v2";
 
 const config = new Configuration({
-  basePath: "https://api.beetrade.com/api/v2",
+  basePath: "https://api.prod.beetrade.com/api/v2",
   accessToken: "your-token",
 });
 

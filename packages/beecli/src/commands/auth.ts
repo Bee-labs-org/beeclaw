@@ -40,12 +40,19 @@ async function resolveLoginCredentials(options: {
     const email =
       options.email ??
       (await rl.question("Email: ")).trim();
-    muted = true;
-    const password =
-      options.password ??
-      (await rl.question("Password: "));
-    muted = false;
-    process.stdout.write("\n");
+    let password: string;
+    if (options.password) {
+      password = options.password;
+    } else {
+      process.stdout.write("Password: ");
+      muted = true;
+      password = await rl.question("");
+    }
+
+    if (!options.password) {
+      muted = false;
+      process.stdout.write("\n");
+    }
 
     if (!email || !password) {
       error("Both email and password are required");

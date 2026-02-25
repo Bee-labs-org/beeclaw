@@ -22,7 +22,7 @@ Use this skill to operate `beecli` safely and efficiently.
 
 1. Confirm `beecli` exists: `beecli --help`.
 2. Check auth state first: `beecli auth status`.
-3. If unauthenticated, ask for credentials and run login.
+3. If unauthenticated, run `beecli auth login` to interactively continue the login flow.
 4. Run read-only/list/get command first to discover IDs before write actions.
 5. For mutating operations, restate exact command and impact before executing.
 

@@ -72,13 +72,10 @@ export function registerAuthCommand(program: Command): void {
     .description("Login with email and password")
     .option("-e, --email <email>", "Email address")
     .option("-p, --password <password>", "Password")
-    .option("--api-url <url>", "API base URL")
     .action(async (options) => {
       try {
         const credentials = await resolveLoginCredentials(options);
-        const config = createConfig(
-          options.apiUrl ? { basePath: options.apiUrl } : undefined
-        );
+        const config = createConfig();
         const api = new AuthApi(config);
 
         const request: LoginRequest = {
@@ -94,7 +91,7 @@ export function registerAuthCommand(program: Command): void {
 
         const data = response.data;
         setConfig({
-          apiUrl: options.apiUrl || getConfig().apiUrl,
+          apiUrl: getConfig().apiUrl,
           accessToken: data!.accessToken,
           refreshToken: data!.refreshToken,
           email: credentials.email,
